@@ -1,0 +1,19 @@
+artifactory:
+  image: jfrog-docker-reg2.bintray.io/jfrog/artifactory-oss
+  ports:
+    - "8081:8081"
+  environment:
+    - ARTIFACTORY_HOME='/var/opt/jfrog/artifactory'
+  volumes:
+    - ./artifactory/data:$ARTIFACTORY_HOME/data
+    - ./artifactory/logs:$ARTIFACTORY_HOME/logs
+    - ./artifactory/backup:$ARTIFACTORY_HOME/backup
+jenkins:
+  build: ./jenkins
+  ports:
+    - "8082:8080"
+    - "50001:50001"
+  volumes:
+    - ./jenkins/jenkins_home:/var/jenkins_home
+  links:
+    - artifactory
