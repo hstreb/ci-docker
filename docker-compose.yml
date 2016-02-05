@@ -8,29 +8,6 @@ artifactory:
     - ./artifactory/data:$ARTIFACTORY_HOME/data
     - ./artifactory/logs:$ARTIFACTORY_HOME/logs
     - ./artifactory/backup:$ARTIFACTORY_HOME/backup
-postgresql:
-  image: orchardup/postgresql:latest
-  environment:
-    - POSTGRESQL_USER=sonar
-    - POSTGRESQL_PASS=sonar
-    - POSTGRESQL_DB=sonar
-  volumes:
-    - ./db/sonarqube/:/var/lib/postgresql
-  ports:
-    - "5432:5432"
-sonarqube:
-  image: sonarqube
-  links:
-    - postgresql
-  environment:
-    - SONARQUBE_JDBC_USERNAME=sonar
-    - SONARQUBE_JDBC_PASSWORD=sonar
-    - SONARQUBE_JDBC_URL=jdbc:postgresql://postgresql/sonar
-    - SONAR_RUNNER_OPTS="-Xmx4048m -Xms1024m -XX:MaxPermSize=512m -XX:ReservedCodeCacheSize=128m"
-  ports:
-    - "9000:9000"
-    - "9092:9092"
-    - "443"
 jenkins:
   build: ./jenkins
   ports:
@@ -40,4 +17,3 @@ jenkins:
     - ./jenkins/jenkins_home:/var/jenkins_home
   links:
     - artifactory
-    - sonarqube

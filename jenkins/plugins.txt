@@ -16,6 +16,6 @@ docker-build-publish:1.1
 gradle:1.24
 artifactory:2.4.6
 sonar:2.3
-parameterized-trigger:2:30
+parameterized-trigger:2.30
 publish-over-ssh:1.13
 release:2.5.4
