@@ -13,7 +13,5 @@ jenkins:
   ports:
     - "8082:8080"
     - "50001:50001"
-  volumes:
-    - ./jenkins/jenkins_home:/var/jenkins_home
   links:
     - artifactory
